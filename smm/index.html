@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/particles.js"></script>
+		<link rel="stylesheet" href="css/style2.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/animate.css" />
+		<link rel="stylesheet" href="css/button.css" />
+
+		<style>
+			#123 {
+				position: relative;
+				text-align: center;
+				width: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<br /><br /><br /><br />
+			<div class="screen"></div>
+			<br /><br /><br /><br />
+			<div class="aaa">
+				<button class="btn">点我开始</button>
+				<br /><br /><br /><br /><br /><br />
+				<button class="btn2">点我停止</button>
+			</div>
+		</div>
+
+		<div id="particles-js"></div>
+
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+			$('#login-button').click(function(event) {
+				event.preventDefault();
+				$('form').fadeOut(500);
+				$('.wrapper').addClass('form-success');
+			});
+
+			window.addEventListener('resize', function() {
+				if(document.activeElement.tagName === 'INPUT') {
+					document.activeElement.scrollIntoView({
+						behavior: "smooth"
+					})
+				}
+			})
+		</script>
+
+		<script type="text/javascript">
+			particlesJS("particles-js", {
+				"particles": {
+					"number": {
+						"value": 100,
+						"density": {
+							"enable": true,
+							"value_area": 800
+						}
+					},
+					"color": {
+						"value": "#000"
+					},
+					"shape": {
+						"type": "circle",
+						"stroke": {
+							"width": 0,
+							"color": "#000000"
+						},
+						"polygon": {
+							"nb_sides": 5
+						},
+						"image": {
+							"src": "img/github.svg",
+							"width": 100,
+							"height": 100
+						}
+					},
+					"opacity": {
+						"value": 0.5,
+						"random": false,
+						"anim": {
+							"enable": false,
+							"speed": 1,
+							"opacity_min": 0.1,
+							"sync": false
+						}
+					},
+					"size": {
+						"value": 3,
+						"random": true,
+						"anim": {
+							"enable": false,
+							"speed": 40,
+							"size_min": 0.1,
+							"sync": false
+						}
+					},
+					"line_linked": {
+						"enable": true,
+						"distance": 150,
+						"color": "#000",
+						"opacity": 0.4,
+						"width": 1
+					},
+					"move": {
+						"enable": true,
+						"speed": 6,
+						"direction": "none",
+						"random": false,
+						"straight": false,
+						"out_mode": "out",
+						"bounce": false,
+						"attract": {
+							"enable": false,
+							"rotateX": 600,
+							"rotateY": 1200
+						}
+					}
+				},
+				"interactivity": {
+					"detect_on": "canvas",
+					"events": {
+						"onhover": {
+							"enable": true,
+							"mode": "grab"
+						},
+						"onclick": {
+							"enable": false,
+							"mode": "push"
+						},
+						"resize": true
+					},
+					"modes": {
+						"grab": {
+							"distance": 140,
+							"line_linked": {
+								"opacity": 1
+							}
+						},
+						"bubble": {
+							"distance": 400,
+							"size": 40,
+							"duration": 2,
+							"opacity": 8,
+							"speed": 3
+						},
+						"repulse": {
+							"distance": 200,
+							"duration": 0.4
+						},
+						"push": {
+							"particles_nb": 4
+						},
+						"remove": {
+							"particles_nb": 2
+						}
+					}
+				},
+				"retina_detect": true
+			});
+		</script>
+		<script>
+			var aList = ['夏晓文', '范晓雪', '李文丽', '唐泽冰', '苏雨飞', '康璇', '郭骏楠', '张全惠子', '齐世清', '杨梦圆', '彭冠豪', '隋彬彬'];
+			var Src = document.getElementsByClassName('screen')[0];
+			var oBtn = document.getElementsByClassName('btn')[0];
+			var oBtn2 = document.getElementsByClassName('btn2')[0];
+			var timer = null;
+			var i = 0; //抽奖之前根据html标签的disabled属性先让停止按钮不能点击，开始按钮能点击
+
+			oBtn.disabled = false;
+			oBtn2.disabled = true;
+			//抽人名即是依次改变Src的innerHTML，所以这里可以用到setInterval;
+			oBtn.onclick = function() {
+				timer = setInterval(function() {
+					Src.innerHTML = aList[i];
+					i++;
+					if(i == aList.length) {
+						i = 0;
+					}
+				}, 50) //点击开始之后改变两个按钮的disabled属性
+				oBtn.disabled = true;
+				oBtn2.disabled = false;
+			}
+			oBtn2.onclick = function() {
+				clearInterval(timer); //点击开始之后改变两个按钮的disabled属性
+				oBtn.disabled = false;
+				oBtn2.disabled = true;
+			}
+
+			var animateButton = function(e) {
+
+				e.preventDefault;
+				//reset animation
+				e.target.classList.remove('animate');
+
+				e.target.classList.add('animate');
+				setTimeout(function() {
+					e.target.classList.remove('animate');
+				}, 700);
+			};
+
+			var classname = document.getElementsByClassName("btn");
+
+			for(var i = 0; i < classname.length; i++) {
+				classname[i].addEventListener('click', animateButton, false);
+			}
+		</script>
+
+	</body>
+
+</html>
